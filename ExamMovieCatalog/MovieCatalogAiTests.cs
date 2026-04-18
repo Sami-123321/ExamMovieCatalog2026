@@ -203,6 +203,17 @@ namespace ExamMovieCatalog
                 Is.EqualTo("Unable to delete the movie! Check the movieId parameter or user verification!")
             );
         }
+
+        [Test]
+        public void testToFail()
+        {
+        var request = new RestRequest("/api/Movie/NonExistingEndpoint", Method.Get);
+
+        var response = client.Execute(request);
+
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
         [OneTimeTearDown]
         public void TearDown()
         {
